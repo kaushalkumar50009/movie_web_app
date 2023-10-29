@@ -22,6 +22,7 @@ function App() {
       <div className="App">{
         url?.total_pages
       }
+        App
       </div>
     </>
   )
