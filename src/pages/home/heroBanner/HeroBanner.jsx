@@ -34,7 +34,7 @@ const HeroBanner = () => {
                 </div>
             }
 
-            <div className="opacity_layer"></div>
+            <div className="opacity-layer"></div>
 
             <ContentWrapper>
 
