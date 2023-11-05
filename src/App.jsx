@@ -26,8 +26,6 @@ function App() {
         poster: res.images.secure_base_url + "original",
         profile: res.images.secure_base_url + "original",
       }
-
-
       dispatch(getApiConfiguration(url))
     }
     )
@@ -41,7 +39,7 @@ function App() {
     <>
 
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:mediaType/:id" element={< Details />} />
@@ -50,7 +48,7 @@ function App() {
           <Route path="*" element={< PageNotFound />} />
 
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
 
 
