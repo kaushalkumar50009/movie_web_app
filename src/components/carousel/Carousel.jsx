@@ -14,13 +14,19 @@ import "./style.scss";
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
     const navigate = useNavigate();
     const carouselContainer = useRef(null);
     const { url } = useSelector((state) => state.home)
 
     const navigation = (dir) => {
+        const container = carouselContainer.current
+        const scrollAmount = dir === "left" ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20)
 
+        container.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth"
+        })
     }
 
     const skItem = () => {
@@ -37,18 +43,18 @@ const Carousel = ({ data, loading }) => {
 
         <div className="carousel">
             <ContentWrapper>
-                <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigate("left")} />
+                <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
 
-                <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigate("right")} />
+                <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
 
                 {
                     !loading ? (
-                        <div className="carouselItems">
+                        <div className="carouselItems" ref={carouselContainer}>
                             {
                                 data?.map((item) => {
                                     const posterUrl = item.poster_path ? url.poster + item.poster_path : PosterFallback
                                     return (
-                                        <div className="carouselItem" key={item.id} >
+                                        <div className="carouselItem" key={item.id} onClick={() => navigate(`/${item.media_type || endpoint}/${item.id}`)}>
                                             <div className="posterBlock">
                                                 <Img src={posterUrl} />
                                                 <CircleRating rating={item.vote_average.toFixed(1)} />

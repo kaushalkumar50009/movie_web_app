@@ -6,7 +6,10 @@
     background-color: var(--black);
     display: flex;
     align-items: center;
-    position: relative;
+    // width: 100vw;
+    // position: relative;
+    // top: 0px;
+    // right: 352px;
     @include md{
         height: 700px;
     }
